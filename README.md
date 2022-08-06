@@ -13,9 +13,8 @@
 | first_name         | string | null: false               |
 | last_name_kana     | string | null: false               |
 | first_name_kana    | string | null: false               |
-| birthday_y         | string | null: false               |
-| birthday_m         | string | null: false               |
-| birthday_d         | string | null: false               |
+| birthday           | date   | null: false               |
+
 
 ### Association
 
@@ -24,17 +23,17 @@
 
 ## items テーブル
 
-| Column          | Type       | Options                        |
-| --------------- | ---------- | ------------------------------ |
-| title           | string     | null: false                    | 
-| price           | string     | null: false                    | 
-| introduction    | text       | null: false                    | 
-| category        | string     | null: false                    | 
-| status          | string     | null: false                    | 
-| delivery_charge | string     | null: false                    | 
-| delivery_from   | string     | null: false                    | 
-| delivery_date   | string     | null: false                    | 
-| user            | references | null: false, foreign_key: true |
+| Column             | Type        | Options                        |
+| ------------------ | ----------- | ------------------------------ |
+| title              | string      | null: false                    | 
+| price              | integer     | null: false                    | 
+| introduction       | text        | null: false                    | 
+| category_id        | integer     | null: false                    | 
+| status_id          | integer     | null: false                    | 
+| delivery_charge_id | integer     | null: false                    | 
+| prefecture_id      | integer     | null: false                    | 
+| delivery_date_id   | integer     | null: false                    | 
+| user               | references  | null: false, foreign_key: true |
 
 ### Association
 
@@ -60,12 +59,12 @@
 | Column          | Type       | Options                        |
 | --------------- | ---------- | ------------------------------ |
 | zip             | string     | null: false                    | 
-| prefecture      | string     | null: false                    | 
+| prefecture_id   | integer    | null: false                    | 
 | shikuchouson    | string     | null: false                    | 
 | banchi          | string     | null: false                    | 
 | building        | string     |                                | 
 | phone_num       | string     | null: false                    | 
-| order_id        | references | null: false, foreign_key: true |
+| order           | references | null: false, foreign_key: true |
 
 ### Association
 
