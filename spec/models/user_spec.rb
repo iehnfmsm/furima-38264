@@ -117,21 +117,10 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("First name kana 全角カナ文字を使用してください")
       end
       it "誕生日が必須" do
-        @user.birthday = "2000-5-"
+        @user.birthday = ""
         @user.valid?
         expect(@user.errors.full_messages).to include("Birthday can't be blank")
       end
-      it "誕生月が必須" do
-        @user.birthday = "2000--12"
-        @user.valid?
-        expect(@user.errors.full_messages).to include("Birthday can't be blank")
-      end
-      it "誕生年が必須" do
-        @user.birthday = "-5-29"
-        @user.valid?
-        expect(@user.errors.full_messages).to include("Birthday can't be blank")
-      end
-      
 
     end
 
