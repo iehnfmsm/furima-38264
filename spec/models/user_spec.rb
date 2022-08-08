@@ -52,8 +52,20 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Password is too long (maximum is 128 characters)")
       end
-      it "パスワードが英字と数字の組み合わせでない" do
+      it "パスワードが数字のみ組み合わせ" do
         @user.password = "111111"
+        @user.password_confirmation = @user.password
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
+      end
+      it "パスワードが英字のみ組み合わせ" do
+        @user.password = "abcdef"
+        @user.password_confirmation = @user.password
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
+      end
+      it "パスワードが全角文字" do
+        @user.password = "ヤマダタロウ"
         @user.password_confirmation = @user.password
         @user.valid?
         expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
