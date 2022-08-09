@@ -12,4 +12,4 @@ function inputValues(){
 };
 };
 
-window.addEventListener('turbolinks:load', inputValues);
+window.addEventListener('load', inputValues);
