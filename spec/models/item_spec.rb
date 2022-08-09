@@ -42,6 +42,11 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
       end
+      it "販売価格が半角でない" do
+        @item.price = "４１２７４８９"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
+      end
       it "カテゴリーが選択されていない" do
         @item.category_id = 1
         @item.valid?
