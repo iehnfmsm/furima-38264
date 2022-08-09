@@ -9,8 +9,8 @@ FactoryBot.define do
     delivery_charge_id { Faker::Number.between(from: 2, to: DeliveryCharge.all.length) }
     delivery_date_id { Faker::Number.between(from: 2, to: DeliveryDate.all.length) }
     status_id { Faker::Number.between(from: 2, to: Status.all.length) }
-    after(:build) do |message|
-      message.image.attach(io: File.open('public/images/internet_nft_art.png'), filename: 'internet_nft_art.png')
+    after(:build) do |item|
+      item.image.attach(io: File.open('public/images/internet_nft_art.png'), filename: 'internet_nft_art.png')
     end
   end
 end
