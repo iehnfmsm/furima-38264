@@ -5,8 +5,8 @@ class OrdersController < ApplicationController
   end
 
   def create
-    binding.pry
     @order_address = OrderAddress.new(order_params)
+    binding.pry
     if @order_address.valid?
       @order_address.save
       redirect_to root_path
@@ -18,7 +18,7 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.permit(:zip, :prefecture_id, :shikuchouson, :banchi, :building, :phone_num, :item_id).merge(user_id: current_user.id)
+    params.permit(:zip, :prefecture_id, :shikuchouson, :banchi, :building, :phone_num, :item_id, :user_id).merge(user_id: current_user.id, item_id: params[:item_id])
   end
 
 end

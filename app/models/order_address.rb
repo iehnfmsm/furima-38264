@@ -8,13 +8,13 @@ class OrderAddress
     validates :shikuchouson, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: '全角文字を使用してください' }
     validates :banchi, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: '全角文字を使用してください' }
     validates :phone_num, format: {with: /\A\d{10}\z|\A\d{11}\z/ , message: "ハイフンなし半角数字で記入してください"}
-    validates :token
+    ##validates :token
   end
  
   validates :prefecture_id, numericality: { other_than: 1, message: "都道府県を選択してください" }
 
   def save
     order = Order.create(user_id: user_id, item_id: item_id)
-    Address.create(zip: zip, prefecture_id: prefecture_id, shikuchouson: shikuchouson, banchi: banchi, phone_num: phone_num, token: token, ordeer_id: order.id)
+    Address.create(zip: zip, prefecture_id: prefecture_id, shikuchouson: shikuchouson, banchi: banchi, phone_num: phone_num, order_id: order.id)
   end
  end
