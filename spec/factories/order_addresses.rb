@@ -6,5 +6,6 @@ FactoryBot.define do
     banchi {'七丁目１２番地３号'}
     building {'富士山ビル'}
     phone_num { Faker::Lorem.characters(number: 10, min_numeric: 10) || Faker::Lorem.characters(number: 11, min_numeric: 11) }
+    token {"tok_abcdefghijk00000000000000000"}
   end
 end
