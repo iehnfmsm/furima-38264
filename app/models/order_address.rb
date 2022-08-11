@@ -8,6 +8,8 @@ class OrderAddress
     validates :shikuchouson
     validates :banchi
     validates :phone_num, format: {with: /\A\d{10}\z|\A\d{11}\z/ , message: "ハイフンなし半角数字(１０桁又は１１桁)で記入してください"}
+    validates :user_id
+    validates :item_id
     ##validates :token
   end
  

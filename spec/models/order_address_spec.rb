@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe OrderAddress, type: :model do
   before do
-    @order_address = FactoryBot.build(:order_address)
+    order = FactoryBot.create(:order)
+    @order_address = FactoryBot.build(:order_address, user_id: order.user_id, item_id: order.item_id)
+    sleep 0.1
   end
 
   describe "" do
@@ -66,17 +68,15 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Phone num ハイフンなし半角数字(１０桁又は１１桁)で記入してください")
       end
-      it "orderと結びついていない" do
-        @order_address.order_id = nil
-        binding.pry
+      it "userと結びついていない" do
+        @order_address.user_id = nil
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("User can't be blank")
       end
-      it "" do
-      end
-      it "" do
-      end
-      it "" do
-      end
-      it "" do
+      it "itemと結びついていない" do
+        @order_address.item_id = nil
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Item can't be blank")
       end
 
     end
