@@ -1,7 +1,9 @@
 class OrdersController < ApplicationController
 
+  before_action :put_item, only: [:index, :create]
+
   def index
-    @order = Order.new(order_params)
+    @order_address = OrderAddress.new
   end
 
   def create
@@ -10,7 +12,7 @@ class OrdersController < ApplicationController
       @order_address.save
       redirect_to root_path
     else
-      render action: :index
+      render :index
     end
   end
 
@@ -20,5 +22,8 @@ class OrdersController < ApplicationController
     params.permit(:zip, :prefecture_id, :shikuchouson, :banchi, :building, :phone_num, :item_id, :user_id).merge(user_id: current_user.id, item_id: params[:item_id])
   end
 
+  def put_item
+    @item = Item.find(params[:item_id])
+  end
 end
 
