@@ -1,21 +1,13 @@
 class OrdersController < ApplicationController
 
   before_action :put_item, only: [:index, :create]
+  before_action :authenticate_user!, only: [:index]
 
   def index
-    if user_signed_in?
-      if current_user.id == @item.id
-        redirect_to root_path
-      else
-        if Order.exists?(item_id: @item.id)
-          redirect_to root_path
-        else
-          @order_address = OrderAddress.new
-        end
-      end
-    else
-      redirect_to new_user_session_path
+    if current_user.id == @item.user_id || Order.exists?(item_id: @item.id)
+      redirect_to root_path
     end
+      @order_address = OrderAddress.new
   end
 
   def create
@@ -32,7 +24,7 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order_address).permit(:zip, :prefecture_id, :shikuchouson, :banchi, :building, :phone_num, :item_id, :user_id).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
+    params.require(:order_address).permit(:zip, :prefecture_id, :shikuchouson, :banchi, :building, :phone_num).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
   end
 
   def put_item
