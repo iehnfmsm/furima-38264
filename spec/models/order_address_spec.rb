@@ -58,8 +58,13 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Phone num ハイフンなし半角数字(１０桁又は１１桁)で記入してください")
       end
-      it "電話番号の桁数が多い" do
+      it "電話番号の桁数が12桁より多い" do
         @order_address.phone_num = "090909090909"
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Phone num ハイフンなし半角数字(１０桁又は１１桁)で記入してください")
+      end
+      it "電話番号の桁数が9桁より少ない" do
+        @order_address.phone_num = "123456789"
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Phone num ハイフンなし半角数字(１０桁又は１１桁)で記入してください")
       end
